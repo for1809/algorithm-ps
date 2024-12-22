@@ -40,9 +40,10 @@ for i in range(int(input())):
 3. top 명령을 명시적으로 처리하는 것이 좋을 것 같음 
 '''
 #개선코드
+'''
 lst = []
 import sys
-for i in range(input()):
+for i in range(int(input())):
     prompt = sys.stdin.readline().split()
     cmd = prompt[0]
 
@@ -56,3 +57,4 @@ for i in range(input()):
         print(1 if not lst else 0)
     elif cmd == 'top':
         print(lst[-1] if lst else -1)
+'''
