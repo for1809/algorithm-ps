@@ -16,3 +16,17 @@ back: 큐의 가장 뒤에 있는 정수를 출력한다. 만약 큐에 들어�
 출력
 출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.
 '''
+from sys import stdin as s
+n = int(s.readline())
+lst1 = []
+lst2 = []
+for i in range(n):
+    prompt = s.readline().strip().split()
+    if prompt[0] == 'push':
+        lst1.append(prompt[1])
+    elif prompt[0] == 'pop':
+        if lst1:
+            print(lst1.pop(0))
+        else:
+            print(-1)
+
