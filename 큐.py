@@ -16,17 +16,46 @@ back: 큐의 가장 뒤에 있는 정수를 출력한다. 만약 큐에 들어�
 출력
 출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.
 '''
+'''
 from sys import stdin as s
 n = int(s.readline())
 lst1 = []
-lst2 = []
 for i in range(n):
     prompt = s.readline().strip().split()
     if prompt[0] == 'push':
-        lst1.append(prompt[1])
+        lst1.append(prompt[-1])
     elif prompt[0] == 'pop':
         if lst1:
             print(lst1.pop(0))
         else:
             print(-1)
+    elif prompt[0] == 'size':
+        print(len(lst1))
+    elif prompt[0] == 'empty':
+        print(0) if lst1 else print(1)
+    elif prompt[0] == 'front':
+        print(lst1[0]) if lst1 else print(-1)
+    elif prompt[0] == 'back':
+        print(lst1[-1]) if lst1 else print(-1)
+'''
+# 개선안
+# deque 사용 list와 유사하나 양방향으로 pop, append 가능. popleft, appendleft
+from collections import deque
+from sys import stdin as s
 
+n = int(s.readline())
+que = deque()
+for i in range(n):
+    prompt = s.readline().strip().split()
+    if prompt[0] == 'push':
+        que.append(prompt[-1])
+    elif prompt[0] == 'pop':
+        print(que.popleft()) if que else print(-1)
+    elif prompt[0] == 'size':
+        print(len(que))
+    elif prompt[0] == 'empty':
+        print(0) if que else print(1)
+    elif prompt[0] == 'front':
+        print(que[0]) if que else print(-1)
+    elif prompt[0] == 'back':
+        print(que[-1]) if que else print(-1)
