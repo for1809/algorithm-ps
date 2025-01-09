@@ -39,6 +39,7 @@ print(''.join(tag_1), ' '.join(lst), ''.join(tag_2), sep = '')
 '''
 # 태그가 3개 이상일 때 문제 발생
 # 1차 수정
+'''
 string = s.readline().rstrip()
 tag = deque()
 word = deque()
@@ -57,7 +58,56 @@ for s in string:
             word.append(s)
 print(tag)
 print(word)
+'''
 # 태그 분리는 성공했으나 재조합에 문제가 생김
+# 수정본
 string = s.readline().rstrip()
-tag = deque()
-word = deque()
+lst = []
+result = []
+for char in string:
+    if char == '>':
+        lst.append(char)
+        result.append(''.join(lst))
+        lst.clear()
+    elif char == '<':
+        result.append(''.join(reversed(lst)))
+        lst.clear()
+        lst.append(char)
+    elif char == ' ' and lst[0] != '<':
+        result.append(''.join(reversed(lst)))
+        result.append(char)
+        lst.clear()
+    else:
+        lst.append(char)
+if lst:
+    result.append(''.join(reversed(lst)))
+print(''.join(result))
+# 최적화 코드 (gpt)
+string = input().rstrip()  # 문자열 입력 받기
+result = []  # 최종 결과 저장
+word = ''  # 현재 단어를 저장
+in_tag = False  # 태그 내부 여부 확인
+
+for char in string:
+    if char == '<':  # 태그 시작
+        result.append(word[::-1])  # 단어를 역순으로 추가
+        word = ''
+        in_tag = True
+        result.append(char)
+    elif char == '>':  # 태그 끝
+        in_tag = False
+        result.append(char)
+    elif in_tag:  # 태그 내부 문자
+        result.append(char)
+    elif char == ' ':  # 공백 문자
+        result.append(word[::-1])  # 공백 전 단어를 역순으로 추가
+        result.append(char)  # 공백 그대로 추가
+        word = ''
+    else:  # 일반 문자 (단어 구성)
+        word += char
+
+# 마지막 남은 단어 처리
+result.append(word[::-1])
+
+# 결과 출력
+print(''.join(result))
