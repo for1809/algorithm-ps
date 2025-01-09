@@ -25,6 +25,8 @@
 출력
 잘려진 조각의 총 개수를 나타내는 정수를 한 줄에 출력한다.
 '''
+# 1차시: 루프 두 번 돌기, 시간 복잡도:O(n)
+'''
 loc = input()
 lst = []
 for _ in loc:
@@ -36,10 +38,18 @@ for _ in loc:
             lst.append(_)
     else:
         lst.append(_)
-stack = ()
-lcount = 0
-for l in lst:
-    if l == '(':
-        stack.append(l)
-    elif l == '/':
-        lcount += 1------------------------------------------------------------
+slash = ''.join(lst)
+slst = []
+result = 0
+for _ in slash:
+    if _ == '(':
+        slst.append(_)
+    elif _ == ')':
+        slst.pop()
+        result += 1
+    elif _ == '/':
+        result += len(slst)
+print(result)
+'''
+# 정답은 맞는데 더 좋은 방법을 찾아보자
+
