@@ -29,3 +29,26 @@ for i, v in enumerate(seq):
 print(result)
 '''
 # 시간복잡도 O(n2) 당연히~ 시간초과
+
+# 스택 활용
+n = int(input())
+seq = list(map(int, input().split()))
+result = [-1] * n
+stack = []
+for i in range(n - 1, -1, -1):
+    v = seq[i]
+    if stack:
+        while True:
+            if stack[-1] > v:
+                result[i] = stack[-1]
+                stack.append(v)
+                break
+            elif stack[-1] <= v:
+                stack.pop()
+            if not stack:
+                stack.append(v)
+                break
+    else:
+        stack.append(v)
+print(' '.join(map(str,result)))
+
