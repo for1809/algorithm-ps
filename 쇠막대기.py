@@ -52,4 +52,21 @@ for _ in slash:
 print(result)
 '''
 # 정답은 맞는데 더 좋은 방법을 찾아보자
-
+loc = input()
+lst = []
+result = 0
+for i, c in enumerate(loc):
+    if c == '(':
+        lst.append(c)
+    elif c == ')':
+        if loc[i - 1] == '(':
+          lst.pop()
+          result += len(lst)
+        else:
+            lst.pop()
+            result += 1
+print(result)
+''' 예전에 풀었던 문제에서 리스트 인덱스 검색으로 풀었을 때 시간 초과 났던 희미한 기억 때문에
+인덱싱의 시간 복잡도가 1차였던 것 같은데 사실 상수였다. 아마 insert랑  value찾기랑 헷갈린듯...
+괜히 돌아갔네
+엥 그런데 첫번째 코드보다 시간이 더 걸렸다... 뭐지?'''
